@@ -14,15 +14,15 @@ module powerbi.extensibility.visual {
         private divTable: HTMLElement;
         private map: L.Map;
         private basemap: L.TileLayer;
-        private layer: L.TileLayer;
+        private layer;
 
         constructor(options: VisualConstructorOptions) {
             console.log('Visual constructor', options);
             this.target = options.element;
             this.divMap = document.createElement("div");
             this.divMap.id = "map";
-            this.divMap.style.height = "100%";   
-            this.divMap.style.width = "100%";
+            // this.divMap.style.height = "100%";   
+            // this.divMap.style.width = "100%";
             this.divMap.style.position = "absolute";
             this.divMap.style.top = "0";
             this.divMap.style.bottom = "0";
@@ -40,18 +40,18 @@ module powerbi.extensibility.visual {
                 // this.map.addLayer(this.layer);
 
             //Alternative 1
-                this.basemap = L.esri.basemapLayer('Streets');
-                    this.map.addLayer(this.basemap);
-                this.layer = L.esri.featureLayer({
-                    url:'https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
-                });
-                    this.map.addLayer(this.layer);
+                // this.basemap = T.esri.basemapLayer('Streets');
+                //     this.map.addLayer(this.basemap);
+                // this.layer = T.esri.featureLayer({
+                //     url:'https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
+                // });
+                //     this.map.addLayer(this.layer);
             
             //Alternative 2
-                // L.esri.basemapLayer('Streets').addTo(this.map);
-                // L.esri.featureLayer({
-                //     url:'https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
-                // }).addTo(this.map);
+                L.esri.basemapLayer('Streets').addTo(this.map);
+                L.esri.featureLayer({
+                    url:'https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
+                }).addTo(this.map);
         }
 
         public update(options: VisualUpdateOptions) {
